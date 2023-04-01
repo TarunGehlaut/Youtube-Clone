@@ -29,6 +29,7 @@ const SearchBar = ({
       fetchRealTimeData(searchQuery);
     } else {
       clearRealTimeResults();
+      setShowRealTimeResults(false);
     }
   }, [searchQuery]);
 
@@ -38,6 +39,7 @@ const SearchBar = ({
       searchQuery?.length > 0
     ) {
       navigate(`/searchResult/${searchQuery}`);
+      setShowRealTimeResults(false);
     }
   };
 

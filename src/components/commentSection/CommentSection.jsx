@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { fetchDataFromAPI } from "../..//utils/api";
 import { Context } from "../../context/ContextApi";
+import CommentInput from "./CommentInput";
+import UsersComments from "./UsersComments";
 
 import { MdOutlineSort } from "react-icons/md";
 
@@ -15,6 +17,7 @@ const CommentSection = () => {
   const [commentsDetails, setCommentsDetails] = useState(null);
 
   const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     fetchCommentsData();
@@ -38,7 +41,10 @@ const CommentSection = () => {
         "Eg0SC2RJVThzWnN6bVI4GAYyJSIRIgtkSVU4c1pzem1SODABeAJCEGNvbW1lbnRzLXNlY3Rpb24";
     }
 
-    try {
+    if (fetchCommentsData.timeoutId) {
+      clearTimeout(fetchCommentsData.timeoutId);
+    }
+    fetchCommentsData.timeoutId = setTimeout(() => {
       fetchDataFromAPI(`video/comments/?id=${id}&cursor=${cursorFilter}`)
         .then((res) => {
           setComments(res?.comments);
@@ -49,54 +55,53 @@ const CommentSection = () => {
           console.log(err);
           setLoading(false);
         });
-    } catch (err) {
-      console.log(err);
-    }
+    }, 500);
   };
 
-  console.log(comments);
+  const onComment = (newComment) => {
+    setComments((prev) => [newComment, ...prev]);
+  };
 
   return (
-    <div className="relative">
-      <div className="flex flex-row text-white text-md items-center font-semibold gap-10 cursor-pointer ">
+    <div className="relative flex flex-col ">
+      <div className="flex flex-row text-white text-md items-center font-semibold  cursor-pointer ">
         <span>{commentsDetails?.totalCommentsCount} Comments</span>
         <span
           onClick={() => setShowSort((prev) => !prev)}
-          className="flex flex-row items-center  gap-2  "
+          className="flex flex-col items-center  gap-2  "
         >
-          <MdOutlineSort className="text-2xl text-white " />
-          Sort
-        </span>
-      </div>
-      {showSort && (
-        <div className="flex flex-col text-white w-32  overflow-hidden rounded-lg absolute left-[116px] top-8">
-          <span
-            onClick={() => handleSortMethodChange("top")}
-            className={`hover:bg-white/[0.4] flex items-center justify-center px-2 py-4 cursor-pointer text-center first-letter:
-            ${sortMethod === "top" ? "bg-white/[0.4]" : "bg-white/[0.15]"}
-            `}
-          >
-            Top Comments
+          <span className="flex flex-row gap-2">
+            <MdOutlineSort className="text-2xl text-white flex flex-col  ml-12 md:ml-20 lg:ml-28 xl:ml-36" />
+            Sort
           </span>
-          <span
-            onClick={() => handleSortMethodChange("new")}
-            className={`hover:bg-white/[0.4] flex items-center justify-center px-2 py-4 cursor-pointer text-center
+          {showSort && (
+            <div className=" text-white w-32  overflow-hidden rounded-lg  z-10">
+              <span
+                onClick={() => handleSortMethodChange("top")}
+                className={`hover:bg-white/[0.3] flex items-center justify-center px-1 py-2 cursor-pointer text-center text-sm z-10
+            ${sortMethod === "top" ? "bg-white/[0.3]" : "bg-white/[0.15]"}
+            `}
+              >
+                Top Comments
+              </span>
+              <span
+                onClick={() => handleSortMethodChange("new")}
+                className={`hover:bg-white/[0.4] flex items-center justify-center px-1 py-2 cursor-pointer text-center text-sm -z-10
             ${sortMethod === "new" ? "bg-white/[0.4]" : "bg-white/[0.15]"}
             `}
-          >
-            Newest First
-          </span>
-        </div>
-      )}
-      <div>
-        {/* {comments.map((item) => {
-          return (
-            <p key={item?.commentId} className="text-white text-md">
-              {item}
-            </p>
-          );
-        })} */}
+              >
+                Newest First
+              </span>
+            </div>
+          )}
+        </span>
       </div>
+
+      <CommentInput onComment={onComment} />
+
+      {comments?.map((comment) => {
+        return <UsersComments key={comment.commentId} comment={comment} />;
+      })}
     </div>
   );
 };

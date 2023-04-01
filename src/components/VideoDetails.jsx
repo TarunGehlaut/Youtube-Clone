@@ -2,6 +2,7 @@ import { abbreviateNumber } from "js-abbreviation-number";
 import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { CgClose } from "react-icons/cg";
 import { RiMusicFill } from "react-icons/ri";
 import { RxDividerVertical, RxDotsHorizontal } from "react-icons/rx";
 import { TbShare3 } from "react-icons/tb";
@@ -19,6 +20,7 @@ import SuggestionVideoCard from "./SuggestionVideoCard";
 const VideoDetails = () => {
   const [video, setVideo] = useState();
   const [relatedVideos, setRelatedVideos] = useState();
+  const [showCommentSection, setShowCommentSection] = useState(false);
 
   const [subscribe, setSubcribe] = useState(false);
   const { id } = useParams();
@@ -56,7 +58,7 @@ const VideoDetails = () => {
         <div className="w-full max-w-[1380px] flex flex-col lg:flex-row">
           <div className="flex flex-col lg:w-[calc(100%-350px)] xl:w-[calc(100%-400px)] px-4 py-3 lg:py-6 ">
             {/* Video PLayes */}
-            <div className="h-[200px] md:h-[400px] lg:h-[400px] xl:h-[550px] ml-[-16px] lg:ml-0 mr-[-16px] lg:mr-0">
+            <div className="min-h-[200px] md:min-h-[400px] lg:min-h-[400px] xl:min-h-[550px] ml-[-16px] lg:ml-0 mr-[-16px] lg:mr-0">
               <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${id}`}
                 controls
@@ -119,7 +121,7 @@ const VideoDetails = () => {
                     <TfiDownload className="text-xl text-white mr-2" />
                     Download
                   </div>
-                  <div className="flex items-center justify-center  w-8 h-8  md::h-11 md:w-11 px-2  md:px-4 rounded-full bg-white/[0.15] ">
+                  <div className="flex items-center justify-center  w-8 h-8  md::h-11 md:w-11 rounded-full  bg-white/[0.15] ">
                     <RxDotsHorizontal className="text-xl text-white " />
                   </div>
                 </div>
@@ -127,7 +129,29 @@ const VideoDetails = () => {
             </div>
             {/* Comment Section */}
             <div className="flex flex-col mt-5 px-4 py-3 lg:py-6 ">
-              <CommentSection />
+              <div className="hidden lg:block">
+                <CommentSection />
+              </div>
+              <div className="block lg:hidden border-2 border-zinc-400 rounded-2xl py-2">
+                {showCommentSection ? (
+                  <div className="p-5">
+                    <div
+                      className={`flex items-center justify-center cursor-pointer mb-2    md:mr-6 h-10 w-10 rounded-full hover:bg-[#3f3f3f]/[0.6]`}
+                      onClick={() => setShowCommentSection(false)}
+                    >
+                      <CgClose className="text-white text-xl " />
+                    </div>
+                    <CommentSection />
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => setShowCommentSection(true)}
+                    className="bg-slate-300 mx-5 py-1 px-2 rounded-full"
+                  >
+                    show Comments
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           {/* Suggested Videos */}

@@ -28,6 +28,7 @@ export const AppContext = ({ children }) => {
         setLoading(false);
       });
   };
+
   const handleLoadMore = () => {
     setLoading(true);
     fetchDataFromAPI(`search/?q=${selectCategories}&cursor=${cursor}`)

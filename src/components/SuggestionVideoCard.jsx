@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const SuggestionVideoCard = ({ video }) => {
   const navigate = useNavigate();
+
   return (
     <div onClick={() => navigate(`video/${video?.videoId}`)}>
       <div className="flex  mb-3">
