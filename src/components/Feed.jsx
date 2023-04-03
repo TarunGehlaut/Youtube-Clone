@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 import { useNavigate } from "react-router-dom";

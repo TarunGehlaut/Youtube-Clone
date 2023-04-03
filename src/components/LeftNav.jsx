@@ -51,8 +51,6 @@ const LeftNav = () => {
               </React.Fragment>
             );
           })}
-          <hr className="my-4 border-white/[0.2]" />
-          <div className="text-[#dfdfdf] text-sm">Clone by: JS Dev Hindi</div>
         </div>
       </div>
 

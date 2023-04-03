@@ -90,15 +90,15 @@ const Header = () => {
               {showRealTimeResults ? (
                 <div className="bg-white h-[420px] pr-1  py-3  w-52 md:w-80 lg:w-[540px] absolute top-[60px] left-[20px] md:left-[60px] rounded-xl  z-50 ">
                   {realTimeResults?.map((item, index) => {
-                    if (index < 10)
-                      return (
-                        <RealTimeSearchResults
-                          key={index}
-                          video={item}
-                          index={index}
-                          action={() => setShowRealTimeResults(false)}
-                        />
-                      );
+                    if (index > 10) return false;
+                    return (
+                      <RealTimeSearchResults
+                        key={index}
+                        video={item}
+                        index={index}
+                        action={() => setShowRealTimeResults(false)}
+                      />
+                    );
                   })}
                 </div>
               ) : (

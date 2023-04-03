@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CgClose } from "react-icons/cg";
@@ -59,14 +59,14 @@ const SearchBar = ({
         />
         {debouncingQuery?.length > 0 && (
           <div
-            className={`flex items-center justify-center cursor-pointer  mr-1 h-10 w-10 rounded-full hover:bg-[#3f3f3f]/[0.6]`}
+            className={`flex items-center justify-center cursor-pointer  mr-1 h-7 w-7 lg:h-10 lg:w-10 rounded-full hover:bg-[#3f3f3f]/[0.6]`}
           >
             <CgClose
               onClick={() => {
                 setDebouncingQuery("");
                 setShowRealTimeResults(false);
               }}
-              className="text-white text-xl"
+              className="text-white text-sm lg:text-xl"
             />
           </div>
         )}
