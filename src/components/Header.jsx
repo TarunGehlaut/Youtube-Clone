@@ -124,7 +124,7 @@ const Header = () => {
               <FiBell className="text-white text-xl cursor-pointer" />
             </div>
           </div>
-          <div className="flex md:ml-4 h-8 w-8 rounded-full overflow-hidden cursor-pointer">
+          <div className="hidden md:flex md:ml-4 h-8 w-8 rounded-full overflow-hidden cursor-pointer">
             <img
               src="https://xsgames.co/randomusers/assets/avatars/female/20.jpg"
               alt="user"

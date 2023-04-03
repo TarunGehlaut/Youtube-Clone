@@ -5,7 +5,7 @@ import { fetchDataFromAPI } from "../utils/api";
 
 import { CgClose } from "react-icons/cg";
 
-const FilterSearchResults = ({ data, setResult, setData }) => {
+const FilterSearchResults = ({ data, setResult, setData, setShowFilter }) => {
   const [filterMethod, setFilterMethod] = useState("Relevance");
   const [cursor, setCursor] = useState("");
 
@@ -45,13 +45,13 @@ const FilterSearchResults = ({ data, setResult, setData }) => {
         }
         return (
           <div key={index} className="flex flex-col ">
-            <h3 className="text-sm text-white font-semibold uppercase pr-10 pb-4 border-b-2 border-zinc-500">
+            <h3 className="text-xs md:text-sm text-white font-semibold uppercase  pb-2 md:pr-10 md:pb-4 border-b-2 border-zinc-500">
               {filterGroup?.title}
             </h3>
-            <div className="flex flex-col gap-2 my-5">
+            <div className="flex flex-col gap-1  md:gap-2 my-5">
               {filterGroup?.filters?.map((filter, index) => {
                 return (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center  gap-1 md:gap-2">
                     <div
                       onClick={() => {
                         setCursor(filter?.cursorSelect);
@@ -63,7 +63,7 @@ const FilterSearchResults = ({ data, setResult, setData }) => {
                         filterMethod === filter?.label
                           ? "text-white"
                           : "text-white/[0.7]"
-                      }  text-base font-medium cursor-pointer  `}
+                      } text-xs  md:text-base font-medium cursor-pointer  `}
                     >
                       {filter?.label}
                     </div>

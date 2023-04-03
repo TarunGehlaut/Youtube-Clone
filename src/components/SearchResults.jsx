@@ -23,11 +23,14 @@ const SearchResult = () => {
   const fetchSearchResults = (searchQuery) => {
     setLoading(true);
     fetchDataFromAPI(`search/?q=${searchQuery}`).then((res) => {
+      console.log(res);
       setResult(res?.contents);
       setData(res);
       setLoading(false);
     });
   };
+
+  console.log("data:", data);
 
   return (
     <div className="flex flex-row h-[calc(100%-56px)]">
@@ -35,7 +38,7 @@ const SearchResult = () => {
         <LeftNav />
       </div>
       <div className="grow w-[calc(100%-240px)] flex flex-col h-full overflow-y-auto bg-black">
-        <div className="text-xl flex flex-col border-b-2 border-zinc-700 ml-5 mr-16  lg:mr-24 xl:mr-32 mt-5 ">
+        <div className="text-xl flex flex-col border-b-2 border-zinc-700  ml-1 mr-2 md:ml-5 md:mr-16  lg:mr-24 xl:mr-32 mt-5 ">
           <span
             onClick={() => setShowFilter((prev) => !prev)}
             className="flex items-center justify-center text-white text-sm  h-8 w-20   rounded-2xl hover:bg-[#3f3f3f]/[0.6] cursor-pointer "
