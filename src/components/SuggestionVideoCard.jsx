@@ -4,13 +4,11 @@ import { IoIosRadio } from "react-icons/io";
 import { RiMusicFill } from "react-icons/ri";
 import VideoLength from "../shared/VideoLength";
 
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SuggestionVideoCard = ({ video }) => {
-  const navigate = useNavigate();
-
   return (
-    <div onClick={() => navigate(`video/${video?.videoId}`)}>
+    <Link to={`/video/${video?.videoId}`}>
       <div className="flex  mb-3">
         <div className="relative h-24 lg:h-20 xl:h-24 w-40 min-w-[168px] lg:w-32 lg:min-w-[128px] xl:w-40 xl:min-w-[168px] rounded-xl bg-slate-800 overflow-hidden">
           <img
@@ -61,7 +59,7 @@ const SuggestionVideoCard = ({ video }) => {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

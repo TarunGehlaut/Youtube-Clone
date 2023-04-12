@@ -66,8 +66,3 @@ code {
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .custom-h {
-    height: 100vh !important;
-  }
-}

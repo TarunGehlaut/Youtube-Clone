@@ -33,7 +33,7 @@ const VideoDetails = () => {
 
   const fetchVideoDetails = () => {
     setLoading(true);
-    fetchDataFromAPI(`video/details/?id=${id}`).then((res) => {
+    fetchDataFromAPI(`/video/details/?id=${id}`).then((res) => {
       setVideo(res);
       setLoading(false);
     });

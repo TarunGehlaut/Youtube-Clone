@@ -7,9 +7,9 @@ const RealTimeSearchResults = ({ video, action }) => {
 
   const navigateHandler = () => {
     if (type === "video") {
-      navigate(`video/${video?.video?.videoId}`);
+      navigate(`/video/${video?.video?.videoId}`);
     } else {
-      navigate(`searchResult/${video?.channel?.title}`);
+      navigate(`/searchResult/${video?.channel?.title}`);
     }
   };
   return (

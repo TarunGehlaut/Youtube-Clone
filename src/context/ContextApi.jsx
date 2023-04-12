@@ -17,33 +17,18 @@ export const AppContext = ({ children }) => {
 
   const fetchSelectCategoriesData = (query) => {
     setLoading(true);
-    fetchDataFromAPI(`search/?q=${query}`)
-      .then((res) => {
-        setSearchResults(res?.contents || []);
-        setCursor(res?.cursorNext);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  };
-
-  const handleLoadMore = () => {
-    setLoading(true);
-    fetchDataFromAPI(`search/?q=${selectCategories}&cursor=${cursor}`)
-      .then((res) => {
-        setSearchResults((prevSearchResults) => [
-          ...prevSearchResults,
-          ...res?.contents,
-        ]);
-        setCursor(res?.cursorNext);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+    setTimeout(() => {
+      fetchDataFromAPI(`search/?q=${query}`)
+        .then((res) => {
+          setSearchResults(res?.contents || []);
+          setCursor(res?.cursorNext);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    }, 500);
   };
 
   return (
@@ -57,7 +42,6 @@ export const AppContext = ({ children }) => {
         setSelectCategories,
         searchResults,
         setSearchResults,
-        handleLoadMore,
       }}
     >
       {children}

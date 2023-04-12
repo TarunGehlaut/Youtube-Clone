@@ -1,4 +1,3 @@
-import "./App.css";
 import { AppContext } from "./context/ContextApi";
 import RouterConfig from "./Router-config/RouterConfig";
 

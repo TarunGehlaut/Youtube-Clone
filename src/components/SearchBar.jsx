@@ -17,7 +17,7 @@ const SearchBar = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchQuery(debouncingQuery);
-    }, 1000);
+    }, 400);
 
     return () => {
       clearTimeout(timer);

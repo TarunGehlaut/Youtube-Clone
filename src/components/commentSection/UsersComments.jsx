@@ -5,7 +5,7 @@ import {
   AiFillDislike,
   AiFillLike,
   AiOutlineDislike,
-  AiOutlineLike
+  AiOutlineLike,
 } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 
@@ -68,8 +68,7 @@ const UsersComments = ({ comment }) => {
   };
 
   const onComment = (newComment) => {
-    commentReplies((prev) => [ ...prev, newComment]);
-    
+    commentReplies((prev) => [...prev, newComment]);
   };
 
   return (

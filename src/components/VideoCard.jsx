@@ -1,15 +1,14 @@
+import { Link } from "react-router-dom";
+
 import { abbreviateNumber } from "js-abbreviation-number";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoIosRadio } from "react-icons/io";
 import { RiMusicFill } from "react-icons/ri";
 import VideoLength from "../shared/VideoLength";
 
-import { useNavigate } from "react-router-dom";
-
 const VideoCard = ({ video }) => {
-  const navigate = useNavigate();
   return (
-    <div onClick={() => navigate(`video/${video?.videoId}`)}>
+    <Link to={`/video/${video?.videoId}`}>
       <div className="flex flex-col mb-4">
         <div className="relative h-48 md:h-40 md:rounded-xl overflow-hidden">
           <img
@@ -75,7 +74,7 @@ const VideoCard = ({ video }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

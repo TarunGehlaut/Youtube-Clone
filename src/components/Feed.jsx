@@ -3,24 +3,17 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 import { useNavigate } from "react-router-dom";
 
-import InfiniteScroll from "react-infinite-scroll-component";
-
 import { subCat } from "../utils/constants";
 
 import LeftNav from "../components/LeftNav";
 import { Context } from "../context/ContextApi";
 import SubCategory from "./SubCategory";
 import VideoCard from "./VideoCard";
+import VideoCardSkeleton from "./laodingSkeletons/VideoCardSkeleton";
 
 const Feed = () => {
-  const {
-    loading,
-    searchResults,
-    handleScroll,
-    selectCategories,
-    setSelectCategories,
-    data,
-  } = useContext(Context);
+  const { loading, searchResults, selectCategories, setSelectCategories } =
+    useContext(Context);
 
   const subCategoryContainer = useRef(null);
 
@@ -83,22 +76,21 @@ const Feed = () => {
           </div>
         </div>
 
-        <>
-          <InfiniteScroll
-            dataLength={searchResults.length}
-            next={handleScroll}
-            hasMore={!!data?.cursorNext}
-            loader={<h4>Loading...</h4>}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-5"
-          >
-            {!loading &&
-              searchResults &&
-              searchResults.map((video, index) => {
-                if (video?.type !== "video") return false;
-                return <VideoCard key={index} video={video?.video} />;
-              })}
-          </InfiniteScroll>
-        </>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-5">
+          {loading && (
+            <>
+              {Array.from({ length: 20 }).map((_, index) => (
+                <VideoCardSkeleton key={index} />
+              ))}
+            </>
+          )}
+          {!loading &&
+            searchResults &&
+            searchResults.map((video, index) => {
+              if (video?.type !== "video") return false;
+              return <VideoCard key={index} video={video?.video} />;
+            })}
+        </div>
       </div>
     </div>
   );
