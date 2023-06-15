@@ -6,18 +6,26 @@ import { Context } from "../../context/ContextApi";
 import CommentInput from "./CommentInput";
 import UsersComments from "./UsersComments";
 
+import useTraverseTree from "../../customHook/useTraverseTree";
+
 import { MdOutlineSort } from "react-icons/md";
 
 const CommentSection = () => {
   const [showSort, setShowSort] = useState(false);
   const [sortMethod, setSortMethod] = useState("top");
-  const { setLoading, mobileMenu } = useContext(Context);
+  const { setLoading } = useContext(Context);
 
   const [comments, setComments] = useState([]);
   const [commentsDetails, setCommentsDetails] = useState(null);
 
+  const { insertNode } = useTraverseTree();
+
+  function handelInsertComment(item, commentID) {
+    const finalTree = insertNode(comments, commentID, item);
+    return finalTree;
+  }
+
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     fetchCommentsData();
@@ -58,10 +66,6 @@ const CommentSection = () => {
     }, 500);
   };
 
-  const onComment = (newComment) => {
-    setComments((prev) => [newComment, ...prev]);
-  };
-
   return (
     <div className="relative flex flex-col ">
       <div className="flex flex-row text-white text-md items-center font-semibold  cursor-pointer ">
@@ -97,10 +101,19 @@ const CommentSection = () => {
         </span>
       </div>
 
-      <CommentInput onComment={onComment} />
+      <CommentInput
+        handelInsertComment={handelInsertComment}
+        comments={comments}
+      />
 
       {comments?.map((comment) => {
-        return <UsersComments key={comment.commentId} comment={comment} />;
+        return (
+          <UsersComments
+            key={comment.commentId}
+            comment={comment}
+            handelInsertComment={handelInsertComment}
+          />
+        );
       })}
     </div>
   );

@@ -20,10 +20,10 @@ const RealTimeSearchResults = ({ video, action }) => {
       }}
       className="flex flex-row items-center pl-1  md:pl-4 pr-2 py-2 cursor-pointer"
     >
-      <span className="mr-2">
-        <IoIosSearch className="text-xl text-black/[0.6]" />
+      <span className="mx-1 md:mx-2">
+        <IoIosSearch className="md:text-xl text-black/[0.6]" />
       </span>
-      <div className="text-black/[0.8] font-semibold text-base truncate">
+      <div className="text-black/[0.8] font-semibold text-sm md:text-base truncate">
         {video?.type === "channel" ? (
           <p className="text-sm text-black  truncate">
             {video?.channel?.title}
@@ -31,7 +31,7 @@ const RealTimeSearchResults = ({ video, action }) => {
         ) : (
           ""
         )}
-        <p>{video?.video?.title}</p>
+        <p className="text-sm">{video?.video?.title}</p>
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ export const AppContext = ({ children }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [selectCategories, setSelectCategories] = useState("New");
   const [searchResults, setSearchResults] = useState([]);
-  const [cursor, setCursor] = useState(null);
 
   useEffect(() => {
     fetchSelectCategoriesData(selectCategories);
@@ -17,18 +16,11 @@ export const AppContext = ({ children }) => {
 
   const fetchSelectCategoriesData = (query) => {
     setLoading(true);
-    setTimeout(() => {
-      fetchDataFromAPI(`search/?q=${query}`)
-        .then((res) => {
-          setSearchResults(res?.contents || []);
-          setCursor(res?.cursorNext);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-        });
-    }, 500);
+    fetchDataFromAPI(`search/?q=${query}`).then(({ contents }) => {
+      console.log(contents);
+      setSearchResults(contents);
+      setLoading(false);
+    });
   };
 
   return (

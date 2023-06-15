@@ -17,7 +17,7 @@ const SearchBar = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchQuery(debouncingQuery);
-    }, 400);
+    }, 200);
 
     return () => {
       clearTimeout(timer);
@@ -28,8 +28,8 @@ const SearchBar = ({
     if (searchQuery !== "") {
       fetchRealTimeData(searchQuery);
     } else {
-      clearRealTimeResults();
       setShowRealTimeResults(false);
+      clearRealTimeResults();
     }
   }, [searchQuery]);
 
@@ -44,7 +44,7 @@ const SearchBar = ({
   };
 
   return (
-    <div className="group flex items-center mx-2">
+    <div className="group flex items-center ">
       <div className="flex  h-8 md:h-10 md:ml-10 md:pl-5 border border-[#3f3f3f] rounded-l-3xl group-focus-within:border-blue-500 md:group-focus-within:ml-5 md:group-focus-within:pl-0">
         <div className="w-10 hidden items-center justify-center md:group-focus-within:flex">
           <IoIosSearch className="text-white text-xl" />
@@ -55,11 +55,11 @@ const SearchBar = ({
           onChange={(e) => setDebouncingQuery(e.target.value)}
           onKeyUp={searchQueryHandler}
           value={debouncingQuery}
-          className="outline-none bg-transparent text-white pr-5 pl-5 md:pl-0 w-44 md:w-64 lg:w-[500px] md:group-focus-within:pl-5"
+          className="outline-none bg-transparent text-white pr-5 pl-5 md:pl-0 w-40 md:w-64 lg:w-[500px] md:group-focus-within:pl-5"
         />
         {debouncingQuery?.length > 0 && (
           <div
-            className={`flex items-center justify-center cursor-pointer  mr-1 h-7 w-7 lg:h-10 lg:w-10 rounded-full hover:bg-[#3f3f3f]/[0.6]`}
+            className={`hidden  md:flex items-center justify-center cursor-pointer   h-7 w-7 lg:h-10 lg:w-10 rounded-full hover:bg-[#3f3f3f]/[0.6]`}
           >
             <CgClose
               onClick={() => {

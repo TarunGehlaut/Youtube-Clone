@@ -13,7 +13,7 @@ import { abbreviateNumber } from "js-abbreviation-number";
 import { fetchDataFromAPI } from "../../utils/api";
 import CommentInput from "./CommentInput";
 
-const UsersComments = ({ comment }) => {
+const UsersComments = ({ comment, handelInsertComment }) => {
   const [showReply, setShowReply] = useState(false);
   const [commentReplies, setCommentReplies] = useState([]);
   const [like, setLike] = useState(false);
@@ -67,9 +67,7 @@ const UsersComments = ({ comment }) => {
     setShowReply((prev) => !prev);
   };
 
-  const onComment = (newComment) => {
-    commentReplies((prev) => [...prev, newComment]);
-  };
+ 
 
   return (
     <div>
@@ -147,7 +145,10 @@ const UsersComments = ({ comment }) => {
         )}
         {showReply && (
           <>
-            <CommentInput onComment={onComment} />
+            <CommentInput
+              comments={comment}
+              handelInsertComment={handelInsertComment}
+            />
             {commentReplies?.map((comment) => {
               return (
                 <UsersComments key={comment.commentId} comment={comment} />

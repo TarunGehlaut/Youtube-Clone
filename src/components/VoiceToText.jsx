@@ -39,7 +39,7 @@ const VoiceToText = ({ setShowVoiceText }) => {
       <div className="bg-[#212121] w-[400px]   lg:w-[480px] xl:w-[600px] h-[400px] flex items-center justify-center z-20 "></div>
       <div
         onClick={() => setShowVoiceText(false)}
-        className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-black opacity-40 cursor-pointer"
+        className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-[#0f0f0f] opacity-40 cursor-pointer"
       ></div>
       <div className="absolute inset-0 text-white z-50  pl-4 lg:pl-10 md:pr-1 lg:pr-2 py-1 ">
         <div className="flex flex-col">

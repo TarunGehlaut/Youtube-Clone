@@ -1,50 +1,29 @@
 import React, { useRef, useState } from "react";
 import { SetTextAreaHeight } from "./SetTextAreaHeight";
 
-const CommentInput = ({ onComment }) => {
-  const [commentBody, setCommentBody] = useState("");
+const CommentInput = ({ handelInsertComment, comments }) => {
   const [isReplying, setIsReplying] = useState(false);
+  const [item, setItem] = useState("");
   const textAreaContainer = useRef();
 
   const cancelInputHandler = () => {
     setIsReplying(false);
-    setCommentBody("");
     SetTextAreaHeight(textAreaContainer.current, "48px", true);
   };
 
   const inputHandler = (e) => {
     const comment = e.target.value;
-    if (comment.length === 0) {
-      setIsReplying(false);
-      setCommentBody("");
-      SetTextAreaHeight(textAreaContainer.current, "48px", true);
-    } else {
-      setCommentBody(comment);
+    if (comment.trim().length > 0) {
       setIsReplying(true);
+      setItem(comment);
+    } else {
+      setIsReplying(false);
+      SetTextAreaHeight(textAreaContainer.current, "48px", true);
     }
   };
 
-  const newComment = {
-    0: {
-      author: {
-        avatar: {
-          0: {
-            url: "https://xsgames.co/randomusers/assets/avatars/female/20.jpg",
-          },
-        },
-      },
-      title: "Tarun Gehlaut",
-      commentId: "UgwW1S95-KHLW2bUI-14AaABAg",
-      content: commentBody,
-      creatorHeart: false,
-      pinned: null,
-      publishedTimeText: "1 ]minx ago",
-      stats: {
-        replies: 0,
-        votes: 0,
-      },
-    },
-    comments: [],
+  const onComment = () => {
+    handelInsertComment(item, comments?.id);
   };
 
   return (
@@ -54,7 +33,7 @@ const CommentInput = ({ onComment }) => {
         <div className="flex h-10 w-10 rounded-full overflow-hidden cursor-pointer ">
           <img
             className="w-full h-full"
-            src="https://xsgames.co/randomusers/assets/avatars/female/20.jpg"
+            src="https://moodoffdp.com/wp-content/uploads/2023/04/Cute-Anime-Boy-DP-for-Whatsapp.jpg"
             alt="user"
           />
         </div>
@@ -62,12 +41,11 @@ const CommentInput = ({ onComment }) => {
         <div className="ml-3 flex-1 ">
           <textarea
             placeholder="Add a comment..."
-            value={commentBody}
             ref={textAreaContainer}
             onInput={(e) => {
               SetTextAreaHeight(e, "32px", false);
             }}
-            onChange={inputHandler}
+            onChange={(e) => inputHandler(e)}
             className="bg-inherit z-1  text-white text-base resize-none outline-none border-b-2  overflow-y-hidden border-zinc-400  w-full focus:border-white transition-all"
           />
         </div>
@@ -82,7 +60,7 @@ const CommentInput = ({ onComment }) => {
             Cancel
           </button>
           <button
-            onClick={() => onComment(newComment)}
+            onClick={onComment}
             className="text-sm bg-[#303030] text-white/[0.7] h-10   rounded-full px-5  cursor-pointer "
           >
             Reply

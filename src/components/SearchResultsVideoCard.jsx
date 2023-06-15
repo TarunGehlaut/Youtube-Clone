@@ -10,10 +10,10 @@ import VideoLength from "../shared/VideoLength";
 const SearchResultVideoCard = ({ video }) => {
   return (
     <Link to={`/video/${video?.videoId}`}>
-      <div className="flex flex-col md:flex-row mb-8 md:mb-3 lg:hover:bg-white/[0.1] rounded-xl ">
-        <div className="relative flex shrink-0 h-48 md:h-28 lg:h-40 xl:h-48 w-full md:w-48 lg:w-64 xl:w-80 rounded-xl bg-slate-800 overflow-hidden">
+      <div className="flex flex-col sm:flex-row mb-8 md:mb-3 lg:hover:bg-white/[0.1] rounded-xl ">
+        <div className="relative flex flex-shrink-0 h-48 sm:h-40   w-full sm:w-52 lg:w-64 xl:w-80 rounded-xl bg-slate-800 overflow-hidden">
           <img
-            className="h-full w-full object-center"
+            className="h-full w-full object-cover object-top"
             src={video?.thumbnails[0]?.url}
             alt={video?.author?.title}
           />
@@ -61,7 +61,7 @@ const SearchResultVideoCard = ({ video }) => {
               </span>
             </div>
           </div>
-          <div className=" flex-col hidden md:flex">
+          <div className=" flex-col hidden sm:flex">
             <span className="empty:hidden text-sm line-clamp-1 md:line-clamp-2 text-white/[0.7] md:pr-24 md:my-4">
               {video?.descriptionSnippet}
             </span>

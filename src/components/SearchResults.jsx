@@ -23,7 +23,6 @@ const SearchResult = () => {
   const fetchSearchResults = (searchQuery) => {
     setLoading(true);
     fetchDataFromAPI(`search/?q=${searchQuery}`).then((res) => {
-      console.log(res);
       setResult(res?.contents);
       setData(res);
       setLoading(false);
@@ -33,11 +32,11 @@ const SearchResult = () => {
   console.log("data:", data);
 
   return (
-    <div className="flex flex-row h-[calc(100%-56px)]">
+    <div className="flex flex-row h-[calc(100%-56px)]  ">
       <div className="hidden lg:block w-[240px]">
         <LeftNav />
       </div>
-      <div className="grow w-[calc(100%-240px)] flex flex-col h-full overflow-y-auto bg-black">
+      <div className="flex-grow w-[calc(100%-240px)] flex flex-col h-full scrollbar-hide overflow-y-auto bg-[#0f0f0f]">
         <div className="text-xl flex flex-col border-b-2 border-zinc-700  ml-1 mr-2 md:ml-5 md:mr-16  lg:mr-24 xl:mr-32 mt-5 ">
           <span
             onClick={() => setShowFilter((prev) => !prev)}
@@ -54,7 +53,7 @@ const SearchResult = () => {
             />
           )}
         </div>
-        <div className="grid grid-cols-1 gap-2 p-5">
+        <div className="grid grid-cols-1 gap-2 p-5 md:overflow-y-auto ">
           {result?.map((item, index) => {
             if (item?.type !== "video") return false;
             return <SearchResultVideoCard key={index} video={item.video} />;
