@@ -50,7 +50,6 @@ const VideoDetails = () => {
     });
   };
 
-  console.log(video);
   return (
     <>
       {mobileMenu && (

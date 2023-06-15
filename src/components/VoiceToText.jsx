@@ -36,7 +36,7 @@ const VoiceToText = ({ setShowVoiceText }) => {
 
   return (
     <div className="relative top-[180px] md:left-[130px]  lg:left-0 z-0">
-      <div className="bg-[#212121] w-[400px]   lg:w-[480px] xl:w-[600px] h-[400px] flex items-center justify-center z-20 "></div>
+      <div className="bg-[#212121]   w-[80vw]  lg:w-[50vw]  h-[320px] md:h-[400px] flex items-center justify-center z-20 "></div>
       <div
         onClick={() => setShowVoiceText(false)}
         className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-[#0f0f0f] opacity-40 cursor-pointer"

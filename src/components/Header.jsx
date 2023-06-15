@@ -30,7 +30,6 @@ const Header = () => {
   const fetchRealTimeData = (searchQuery) => {
     setLoading(true);
     fetchDataFromAPI(`search/?q=${searchQuery}`).then((res) => {
-      console.log(res);
       setRealTimeResults(res?.contents);
       setShowRealTimeResults(true);
 
@@ -48,7 +47,7 @@ const Header = () => {
   const pageName = pathName?.split("/")?.filter(Boolean)?.[0];
 
   return (
-    <div className="bg-[#0f0f0f] pt-2 ">
+    <div className="bg-[#0f0f0f]  ">
       <header className="sticky top-0 h-14 z-10 flex flex-row items-center justify-between  md:px-5 bg-[#0f0f0f] ">
         {loading && <Loader />}
         <div className="flex h-5 items-center">
@@ -88,7 +87,7 @@ const Header = () => {
                 setShowRealTimeResults={setShowRealTimeResults}
               />
               {showRealTimeResults ? (
-                <div className="bg-white h-[420px] pr-1  py-3  w-60 md:w-80 lg:w-[540px] absolute top-12 left-1/2 translate-x-[-50%]   rounded-xl  z-50 ">
+                <div className="bg-white h-[420px] pr-1  py-3 w-[75vw] md:w-[50vw] absolute top-[56px] left-1/2 translate-x-[-55%]   rounded-xl  z-50 ">
                   {realTimeResults?.map((item, index) => {
                     if (index > 10) return false;
                     return (
@@ -108,7 +107,7 @@ const Header = () => {
           ) : (
             <VoiceToText setShowVoiceText={setShowVoiceText} />
           )}
-          <div className="flex items-center justify-center cursor-pointer  md:mr-6 h-10 w-10 rounded-full hover:bg-[#3f3f3f]/[0.6]">
+          <div className="flex items-center justify-center cursor-pointer ml-auto  md:mr-6 h-10 w-10 rounded-full hover:bg-[#3f3f3f]/[0.6]">
             <FaMicrophone
               onClick={() => setShowVoiceText(true)}
               className="text-white text-lg"

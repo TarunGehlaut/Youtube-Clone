@@ -29,7 +29,6 @@ const SearchResult = () => {
     });
   };
 
-  console.log("data:", data);
 
   return (
     <div className="flex flex-row h-[calc(100%-56px)]  ">
